@@ -2,14 +2,23 @@
 
 const app = require('koa')()
 const Router = require('koa-router')
-const pug = require('pug')
+const pug = require('koa-pug')
 
+const pug_middleware = new pug({
+	viewPath: './templates',
+	debug: false,
+	pretty: false,
+	compileDebug: false,
+	locals: {},
+	app: app
+})
+
+// Routers
 const apiRouter = require('./apiRouter')
-const indexTemplate = pug.compileFile('./templates/index.pug')
 const rootRouter = new Router()
 
 rootRouter.get('/', function*(){
-	this.body = indexTemplate()
+	this.render('index', {})
 })
 
 app.use(rootRouter.routes())
