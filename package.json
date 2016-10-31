@@ -1,0 +1,25 @@
+{
+  "name": "gatomalo",
+  "version": "2.0.0",
+  "description": "Interface for panamanian fiscal printers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/Bluetide/gatomalo"
+  },
+  "keywords": [
+    "koa",
+    "node",
+    "fiscal",
+    "printer"
+  ],
+  "author": "Roberto E. Zubieta",
+  "license": "MIT",
+  "dependencies": {
+    "koa": "^1.2.4"
+  }
+}
