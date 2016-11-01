@@ -18,7 +18,7 @@ const send_to_printer_generator = function*(content_string="810Test"){
 	let result = yield new Promise( resolve => {
 
 		// Execute driver
-		exec(`./tfunilx SendFileCmd ${info.path}`, resolve)
+		exec(`./bin/tfunilx SendFileCmd ${info.path}`, resolve)
 	})
 
 	// Clean File

@@ -1,6 +1,7 @@
 'use strict'
 
 const cloud_accounting = require('../cloud_accounting')
+const printer = require('../printer')
 const ApiRouter = require('koa-router')({
 	prefix: '/api'
 })
@@ -12,7 +13,8 @@ ApiRouter.get('invoice_page', '/:page', function*(){
 })
 
 ApiRouter.post('print_invoice', '/invoice/:invoice_id/print', function*(){
-	this.body = "Lorem Ipsum" + this.params.invoice_id
+	let result = yield printer("810 ID:" + this.params.invoice_id)
+	this.body = result
 })
 
 module.exports = ApiRouter
