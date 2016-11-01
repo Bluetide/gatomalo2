@@ -17,8 +17,11 @@ const root_generator = function*(){
 	let current_page = this.params.page || 1
 	let response = yield cloud_accounting.getInvoices(current_page)
 	let parsed_response = JSON.parse(response.body)
-	this.body = pug.renderFile('./templates/index.pug', _.merge(parsed_response, {
-	}))
+	this.body = pug.renderFile(
+		'./templates/index.pug',
+		_.merge(parsed_response, {
+		})
+	)
 }
 
 RootRouter.get('index', 	'/'			, root_generator)
