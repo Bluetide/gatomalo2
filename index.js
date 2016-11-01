@@ -2,27 +2,27 @@
 
 const app = require('koa')()
 const Router = require('koa-router')
-const pug = require('koa-pug')
+const pug = require('pug')
 const morgan = require('koa-morgan')
 const serve = require('koa-static')
 const mount = require('koa-mount')
-
-const pug_middleware = new pug({
-	viewPath: './templates',
-	debug: false,
-	pretty: false,
-	compileDebug: false,
-	locals: {},
-	app: app
-})
+const cloud_accounting = require('./cloud_accounting')
+const _ = require('lodash')
 
 // Routers
 const ApiRouter = require('./routers/ApiRouter')
 const RootRouter = new Router()
 
-RootRouter.get('/', function*(){
-	this.render('index', {})
-})
+const root_generator = function*(){
+	let current_page = this.params.page || 1
+	let response = yield cloud_accounting.getInvoices(current_page)
+	let parsed_response = JSON.parse(response.body)
+	this.body = pug.renderFile('./templates/index.pug', _.merge(parsed_response, {
+	}))
+}
+
+RootRouter.get('index', 	'/'			, root_generator)
+RootRouter.get('invoices','/:page', root_generator)
 
 app.use(morgan.middleware('combined'))
 app.use(RootRouter.routes())

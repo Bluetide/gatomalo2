@@ -7,9 +7,36 @@ html
 		link(rel="stylesheet", type="text/css", href="/assets/stylesheets/tether.min.css")
 	body
 
+		.jumbotron
+			.container
+				h1 Gatomalo
+
 		.container
-			h1 Gatomalo
-			#main_container
+			table.table
+				thead.thead-default: tr
+					th Invoice ID
+					th Customer Name
+					th Total
+					th Date
+					th Actions
+				each invoice, index in invoices
+					tr
+						td= invoice.invoice_id
+						td= invoice.customer_name
+						td= `$${invoice.total.toFixed(2)}`
+						td= invoice.created_time
+						td
+							.btn-group
+								a.btn.btn-sm.btn-primary.print_invoice(
+										href="#",
+										type="button",
+										data-invoice-id=invoice.invoice_id
+									) Print
+								a.btn.btn-sm.btn-secondary.refund_invoice(
+										href="#",
+										type="button",
+										data-invoice-id=invoice.invoice_id
+									) Refund
 
 		script(src="/assets/javascripts/jquery.min.js")
 		script(src="/assets/javascripts/tether.min.js")
