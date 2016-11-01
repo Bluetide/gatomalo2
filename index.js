@@ -15,15 +15,16 @@ const pug_middleware = new pug({
 })
 
 // Routers
-const apiRouter = require('./apiRouter')
-const rootRouter = new Router()
+const ApiRouter = require('./routers/ApiRouter')
+const RootRouter = new Router()
 
-rootRouter.get('/', function*(){
+RootRouter.get('/', function*(){
 	this.render('index', {})
 })
 
 app.use(morgan.middleware('combined'))
-app.use(rootRouter.routes())
-app.use(apiRouter.routes())
+app.use(RootRouter.routes())
+app.use(ApiRouter.routes())
+app.use(require('koa-static')('./public'))
 
 app.listen(5000)
