@@ -12,8 +12,9 @@ ApiRouter.get('invoice_page', '/:page', function*(){
 	this.body = JSON.parse(response.body)
 })
 
-ApiRouter.post('print_invoice', '/invoice/:invoice_id/print', function*(){
-	let result = yield printer("810 ID:" + this.params.invoice_id)
+ApiRouter.post('test_invoice', '/invoice/:invoice_id/test', function*(){
+	let invoice = yield cloud_accounting.getInvoice(this.params.invoice_id)
+	let result = yield printer(invoice.test_string_output())
 	this.body = result
 })
 

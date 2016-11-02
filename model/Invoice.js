@@ -29,9 +29,9 @@ module.exports = class Invoice{
 		lines.push( '800' + this.client.company_name)
 		lines.push(this.products.map(item => "800" + item.string_output()).join("\n"))
 		if( this.descuento != 0){
-			lines.push(`800descuento: ${zerofill_decimal(this.discount, 9)()}`)
+			lines.push(`800descuento: ${zerofill_decimal(this.discount, 9)}`)
 		}
-		lines.append('810FIN\r\n')
+		lines.push('810FIN\r\n')
 		return lines.join("\n")
 	}
 

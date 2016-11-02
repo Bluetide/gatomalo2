@@ -3,6 +3,7 @@ doctype html
 html
 	head
 		title GatoMalo
+		link(rel="icon" href="/assets/favicon.png" type="image/png")
 		link(rel="stylesheet", type="text/css", href="/assets/stylesheets/bootstrap-flex.min.css")
 		link(rel="stylesheet", type="text/css", href="/assets/stylesheets/tether.min.css")
 	body
@@ -19,7 +20,7 @@ html
 					th Total
 					th Date
 					th Actions
-				each invoice, index in invoices
+				each invoice in invoices
 					tr
 						td= invoice.invoice_id
 						td= invoice.customer_name
@@ -37,6 +38,11 @@ html
 										type="button",
 										data-invoice-id=invoice.invoice_id
 									) Refund
+								a.btn.btn-sm.btn-secondary.test_invoice(
+										href="#",
+										type="button",
+										data-invoice-id=invoice.invoice_id
+									) Test
 
 		script(src="/assets/javascripts/jquery.min.js")
 		script(src="/assets/javascripts/tether.min.js")
