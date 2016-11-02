@@ -6,8 +6,8 @@ const Request = Promise.promisifyAll(require('request'))
 const {Client, Invoice, Product} = require('../model')
 
 const nconf = require('nconf')
-	.env()
 	.file({file:'./private.json'})
+	.env()
 
 const zoho_url_invoices = 'https://books.zoho.com/api/v3/invoices'
 const zoho_url_contacts = 'https://books.zoho.com/api/v3/contacts'
