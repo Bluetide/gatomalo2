@@ -44,6 +44,15 @@ html
 										data-invoice-id=invoice.invoice_id
 									) Test
 
+			nav(aria-label="Page Navigation")
+				ul.pagination
+					- if (page_context["page"] != 1)
+						li.page-item
+							a.page-link(href=`/${ page_context["page"] - 1 }`) Previous Page
+					- if (page_context.has_more_page)
+						li.page-item
+							a.page-link(href=`/${ page_context["page"] + 1 }`) Next Page
+
 		script(src="/assets/javascripts/jquery.min.js")
 		script(src="/assets/javascripts/tether.min.js")
 		script(src="/assets/javascripts/bootstrap.min.js")
