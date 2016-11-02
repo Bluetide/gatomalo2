@@ -30,17 +30,19 @@ html
 							.btn-group
 								a.btn.btn-sm.btn-primary.print_invoice(
 										href="#",
-										type="button",
+										role="button",
 										data-invoice-id=invoice.invoice_id
 									) Print
 								a.btn.btn-sm.btn-secondary.refund_invoice(
 										href="#",
-										type="button",
+										role="button",
 										data-invoice-id=invoice.invoice_id
+										data-toggle="modal"
+										data-target="#getFiscalIDDialog"
 									) Refund
 								a.btn.btn-sm.btn-secondary.test_invoice(
 										href="#",
-										type="button",
+										role="button",
 										data-invoice-id=invoice.invoice_id
 									) Test
 
@@ -52,6 +54,9 @@ html
 					- if (page_context.has_more_page)
 						li.page-item
 							a.page-link(href=`/${ page_context["page"] + 1 }`) Next Page
+
+		include ./get_fiscal_id_dialog
+		include ./progress_dialog
 
 		script(src="/assets/javascripts/jquery.min.js")
 		script(src="/assets/javascripts/tether.min.js")

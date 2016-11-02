@@ -1,0 +1,18 @@
+.modal.fade#getFiscalIDDialog(role="dialog")
+	.modal-dialog
+		.modal-content
+
+			.modal-header
+				a.close(data-dismiss="modal" aria-label="Close")
+					span(aria-hidden="true") &times;
+				h4.modal-title ID Fiscal
+
+			.modal-body
+				form.form
+					input#invoice_id(type="hidden" name="invoice_id")
+					fieldset.form-group
+						label.control-label(label-for="fiscal_id") ID Fiscal
+						input.form-control#fiscal_id(type="number" name="fiscal_id")
+
+			.modal-footer
+				a.btn.btn-primary.submit-button(role="button", href="#") Aceptar

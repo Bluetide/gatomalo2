@@ -16,7 +16,7 @@ ApiRouter.get('invoice_page', '/:page', function*(){
 
 ApiRouter.post('print_invoice', '/invoice/:invoice_id/print', function*(){
 	let invoice = yield cloud_accounting.getInvoice(this.params.invoice_id)
-	//let result = yield printer(invoice.test_string_output())
+	let result = yield printer(invoice.string_output())
 	this.body = invoice.string_output()
 })
 
@@ -30,7 +30,7 @@ ApiRouter.post('refund_invoice', '/invoice/:invoice_id/refund', KoaBody, functio
 
 	let invoice = yield cloud_accounting.getInvoice(this.params.invoice_id)
 	let refund_model = new Refund(legacy_id, invoice)
-	//let result = yield printer(refund_model.string_output())
+	let result = yield printer(refund_model.string_output())
 	this.body = refund_model.string_output()
 })
 
