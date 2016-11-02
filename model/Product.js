@@ -1,14 +1,15 @@
 'use strict'
 
+const {zerofill_decimal, zerofill_integer} = require('./utils')
+
 module.exports = class Product{
 
 	constructor(name='', amount=0, tasa=0, price=0, discount=0){
 		this.name = name
+		this.amount = Math.floor(amount)
 		this.tasa = tasa
-
-		this.amount = amount.toString()
-		this.price = price.toString()
-		this.discount = discount.toString()
+		this.price = price
+		this.discount = discount
 	}
 
 	parse_tasa(){
@@ -23,26 +24,16 @@ module.exports = class Product{
 		}
 	}
 
-	zerofill_number(number, spaces){
-		let integer = (number*100).toString().split(".")[0]
-		let zeros = []
-		for (var i = 0; i < spaces; i++) {
-			zeros.push('0')
-		}
-		let zerofilled = zeros.join('') + integer
-		return zerofilled.substr(zerofilled.length - number)
-	}
-
 	string_output(){
 		let product_line = [
 			this.parse_tasa(),
-			this.zerofill_number(this.price_as_cents, 10),
-			this.zerofill_number(this.cantidad, 5),
+			zerofill_decimal(this.price, 10),
+			zerofill_integer(this.amount, 5),
 			"000",
 			this.name
 		].join('')
 		if (this.discount > 0){
-			return product_line + "\n" + zerofill_number(this.discount, 9)
+			return product_line + "\n" + zerofill_decimal(this.discount, 9)
 		} else {
 			return product_line
 		}

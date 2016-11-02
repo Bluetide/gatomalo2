@@ -124,12 +124,16 @@ const translate_product = function(product){
 		tasa = 'error'
 	}
 
+	let parameters = [
+		product['name'], product['quantity'], tasa, product['rate']
+	]
+
 	// Parse discount value
 	if(product['discount'] != 0){
-		return new Product(product['name'], product['quantity'], tasa, product['discount'])
-	} else {
-		return new Product(product['name'], product['quantity'], tasa)
+		parameters.push(product['discount'])
 	}
+
+	return new Product(...parameters)
 
 }
 
@@ -140,5 +144,9 @@ module.exports = {
 	getInvoice: Promise.coroutine(function*(invoice_id){
 		let raw_response = yield getInvoiceDetail(invoice_id)
 		return yield parse_invoice_coroutine(JSON.parse(raw_response.body))
+	}),
+	getClient: Promise.coroutine(function*(contact_id){
+		let raw_response = yield getContactDetail(contact_id)
+		return yield parse_contact_coroutine(JSON.parse(raw_response.body))
 	})
 }
