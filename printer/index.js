@@ -25,7 +25,7 @@ const send_to_printer_generator = function*(content_string="810Test"){
 	temp.cleanupSync()
 
 	// Log and return
-	console.log(result)
+	console.log("printed file: " + content_string)
 	return result
 }
 
