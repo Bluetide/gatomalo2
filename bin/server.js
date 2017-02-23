@@ -1,6 +1,7 @@
 'use strict'
 
-const app = require('koa')()
+const Koa = require('koa')
+const app = new Koa()
 const Router = require('koa-router')
 const pug = require('pug')
 const morgan = require('koa-morgan')
@@ -13,11 +14,11 @@ const _ = require('lodash')
 const ApiRouter = require('../routers/ApiRouter')
 const RootRouter = new Router()
 
-const root_generator = function*(){
-	let current_page = this.params.page || 1
-	let response = yield cloud_accounting.getInvoices(current_page)
+const root_generator = async function(ctx){
+	let current_page = ctx.params.page || 1
+	let response = await cloud_accounting.getInvoices(current_page)
 	let parsed_response = JSON.parse(response.body)
-	this.body = pug.renderFile(
+	ctx.body = pug.renderFile(
 		'./templates/index.pug',
 		_.merge(parsed_response, {
 		})
@@ -27,7 +28,7 @@ const root_generator = function*(){
 RootRouter.get('index', 	'/'			, root_generator)
 RootRouter.get('invoices','/:page', root_generator)
 
-app.use(morgan.middleware('combined'))
+app.use(morgan('combined'))
 app.use(RootRouter.routes())
 app.use(ApiRouter.routes())
 

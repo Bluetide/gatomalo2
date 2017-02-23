@@ -8,36 +8,37 @@ const ApiRouter = require('koa-router')({
 	prefix: '/api'
 })
 
-ApiRouter.get('invoice_page', '/:page', function*(){
-	let page = this.params.page || 1
-	let response = yield cloud_accounting.getInvoices(page)
-	this.body = JSON.parse(response.body)
+ApiRouter.get('invoice_page', '/:page', async function(ctx){
+	let page = ctx.params.page || 1
+	let response = await cloud_accounting.getInvoices(page)
+	ctx.body = JSON.parse(response.body)
 })
 
-ApiRouter.post('print_invoice', '/invoice/:invoice_id/print', function*(){
-	let invoice = yield cloud_accounting.getInvoice(this.params.invoice_id)
-	let result = yield printer(invoice.string_output())
-	this.body = invoice.string_output()
+ApiRouter.post('print_invoice', '/invoice/:invoice_id/print', async function(ctx){
+	let invoice = await cloud_accounting.getInvoice(ctx.params.invoice_id)
+	let result = await printer(invoice.string_output())
+	ctx.body = invoice.string_output()
 })
 
-ApiRouter.post('refund_invoice', '/invoice/:invoice_id/refund', KoaBody, function*(){
-	let legacy_id = this.request.body.legacy_id
+ApiRouter.post('refund_invoice', '/invoice/:invoice_id/refund',
+  KoaBody, async function(ctx){
+	let legacy_id = ctx.request.body.legacy_id
 	if (!legacy_id){
-		this.response.status = 400
-		this.body = "Missing legacy_id Param"
+		ctx.response.status = 400
+		ctx.body = "Missing legacy_id Param"
 		return
 	}
 
-	let invoice = yield cloud_accounting.getInvoice(this.params.invoice_id)
+	let invoice = await cloud_accounting.getInvoice(ctx.params.invoice_id)
 	let refund_model = new Refund(legacy_id, invoice)
-	let result = yield printer(refund_model.string_output())
-	this.body = refund_model.string_output()
+	let result = await printer(refund_model.string_output())
+	ctx.body = refund_model.string_output()
 })
 
-ApiRouter.post('test_invoice', '/invoice/:invoice_id/test', function*(){
-	let invoice = yield cloud_accounting.getInvoice(this.params.invoice_id)
-	let result = yield printer(invoice.test_string_output())
-	this.body = result
+ApiRouter.post('test_invoice', '/invoice/:invoice_id/test', async function(ctx){
+	let invoice = await cloud_accounting.getInvoice(ctx.params.invoice_id)
+	let result = await printer(invoice.test_string_output())
+	ctx.body = result
 })
 
 module.exports = ApiRouter
