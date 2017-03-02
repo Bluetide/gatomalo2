@@ -12,4 +12,5 @@ RUN npm install
 
 # Start
 EXPOSE 5000
+ENV NODE_ENV production
 CMD ["npm", "start"]

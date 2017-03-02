@@ -45,6 +45,7 @@ jspm_packages
 
 # Private values
 private.json
+private.env
 
 Retorno.txt
 test/cloud_accounting.js
