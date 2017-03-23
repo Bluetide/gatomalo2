@@ -1,4 +1,4 @@
-FROM node:7.6-alpine
+FROM node:7.7-alpine
 
 # Create app repository
 RUN mkdir -p /srv/gatomalo
@@ -8,7 +8,7 @@ WORKDIR /srv/gatomalo
 COPY . /srv/gatomalo
 
 # Install Dependencies
-RUN npm install
+RUN yarn install
 
 # Start
 EXPOSE 5000
