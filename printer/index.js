@@ -7,15 +7,16 @@ const fs = Promise.promisifyAll(require('fs'))
 // Automatically track created files and clear them after completion
 temp.track()
 
-const send_to_printer_generator = function*(content_string="810Test"){
+// Entry Point
+module.exports = async function(content_string="810Test"){
 
 	// Build the file asynchronously using Promises and yields
-	let info = yield temp.openAsync({suffix:".txt"})
-	let content = yield fs.writeAsync(info.fd, content_string, 'utf-8')
-	yield fs.closeAsync(info.fd)
+	let info = await temp.openAsync({suffix:".txt"})
+	let content = await fs.writeAsync(info.fd, content_string, 'utf-8')
+	await fs.closeAsync(info.fd)
 
 	// Manually create promise due to nonstandard callback
-	let result = yield new Promise( resolve => {
+	let result = await new Promise( resolve => {
 
 		// Execute driver
 		exec(`./bin/tfunilx SendFileCmd ${info.path}`, resolve)
@@ -28,5 +29,3 @@ const send_to_printer_generator = function*(content_string="810Test"){
 	console.log("printed file: " + content_string)
 	return result
 }
-
-module.exports = Promise.coroutine(send_to_printer_generator)

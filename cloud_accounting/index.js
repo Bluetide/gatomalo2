@@ -45,7 +45,7 @@ const getContactDetail = function(contact_id){
 	})
 }
 
-const parse_invoice_coroutine = Promise.coroutine(function*(data){
+const parse_invoice_coroutine = async function(data){
 
 	// Variables
 	let customer_name = data["invoice"]["customer_name"]
@@ -66,8 +66,8 @@ const parse_invoice_coroutine = Promise.coroutine(function*(data){
 	var client_model
 	try {
 		let contact_id = data['invoice']['customer_id']
-		let raw_response = yield getContactDetail(contact_id)
-		client_model = yield parse_contact_coroutine(JSON.parse(raw_response.body))
+		let raw_response = await getContactDetail(contact_id)
+		client_model = parse_contact_coroutine(JSON.parse(raw_response.body))
 	} catch (e) {
 		// Safe Defaults
 		client_model = new Client(customer_name, address)
@@ -78,9 +78,9 @@ const parse_invoice_coroutine = Promise.coroutine(function*(data){
 	invoice_model.products = data["invoice"]["line_items"].map(translate_product)
 
 	return invoice_model
-})
+}
 
-const parse_contact_coroutine = Promise.coroutine(function*(raw_data){
+const parse_contact_coroutine = function(raw_data){
 
 	// Build Model
 	let client_model = new Client(
@@ -108,7 +108,7 @@ const parse_contact_coroutine = Promise.coroutine(function*(raw_data){
 
 	// Return
 	return client_model
-})
+}
 
 const translate_product = function(product){
 
@@ -141,12 +141,12 @@ module.exports = {
 	getInvoices: getInvoices,
 	getInvoiceDetail: getInvoiceDetail,
 	getContactDetail: getContactDetail,
-	getInvoice: Promise.coroutine(function*(invoice_id){
-		let raw_response = yield getInvoiceDetail(invoice_id)
-		return yield parse_invoice_coroutine(JSON.parse(raw_response.body))
-	}),
-	getClient: Promise.coroutine(function*(contact_id){
-		let raw_response = yield getContactDetail(contact_id)
-		return yield parse_contact_coroutine(JSON.parse(raw_response.body))
-	})
+	getInvoice: async function(invoice_id){
+		let raw_response = await getInvoiceDetail(invoice_id)
+		return await parse_invoice_coroutine(JSON.parse(raw_response.body))
+	},
+	getClient: async function(contact_id){
+		let raw_response = await getContactDetail(contact_id)
+		return await parse_contact_coroutine(JSON.parse(raw_response.body))
+	}
 }
