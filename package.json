@@ -18,7 +18,7 @@
     "fiscal",
     "printer"
   ],
-  "engines":{
+  "engines": {
     "node": "8.1.0"
   },
   "author": "Roberto E. Zubieta",
