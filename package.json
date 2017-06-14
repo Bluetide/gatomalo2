@@ -19,7 +19,7 @@
     "printer"
   ],
   "engines":{
-    "node": "7.6.0"
+    "node": "8.1.0"
   },
   "author": "Roberto E. Zubieta",
   "license": "MIT",
