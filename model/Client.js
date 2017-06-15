@@ -4,7 +4,7 @@ module.exports = class Client {
 
 	constructor(company_name='', address='', phone='', ruc='', dv=''){
 		this.company_name = company_name
-		this.address = address
+		this.address = address.replace(/\n\s?/g, ", ") // Remove Newlines
 		this.phone = phone
 		this.ruc = ruc
 		this.dv = dv
