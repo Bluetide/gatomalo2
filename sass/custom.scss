@@ -1,0 +1,10 @@
+// Override default font
+$font-family-sans-serif: Lato, Arial, sans-serif;
+
+@import "bootstrap/scss/bootstrap.scss";
+@import "tether/src/css/tether.sass";
+
+.money-text{
+  text-align: right;
+  font-family: Inconsolata, monospace;
+}

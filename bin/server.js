@@ -36,8 +36,6 @@ app.use(ApiRouter.routes())
 app.use(mount('/assets', serve('./public')))
 app.use(mount('/assets/javascripts', serve('./node_modules/jquery/dist')))
 app.use(mount('/assets/javascripts', serve('./node_modules/tether/dist/js')))
-app.use(mount('/assets/stylesheets', serve('./node_modules/tether/dist/css')))
 app.use(mount('/assets/javascripts', serve('./node_modules/bootstrap/dist/js')))
-app.use(mount('/assets/stylesheets', serve('./node_modules/bootstrap/dist/css')))
 
 app.listen(5000)
