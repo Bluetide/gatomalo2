@@ -28,7 +28,9 @@ html(lang="es")
 							i.zoho_id == invoice.invoice_id 
 						)
 
-					tr(class=(has_been_printed ? 'table-success' : ''))
+					tr(class=(has_been_printed ? 'table-success' : ''), 
+						id=`row_${invoice.invoice_id}`)
+
 						td= invoice.invoice_id
 						td= invoice.customer_name
 						td.money-text= `$${invoice.total.toFixed(2)}`

@@ -13,7 +13,7 @@ jQuery(function($){
 	})
 
 	var ajax_wrapper = function(url, extra_data){
-		$.post(url, extra_data)
+		return $.post(url, extra_data)
 			.always(function(){ $modal_progress.modal('hide')})
 	}
 
@@ -21,6 +21,7 @@ jQuery(function($){
 		var invoiceId = event.target.dataset.invoiceId
 		$modal_progress.modal('show')
 		ajax_wrapper("/api/invoice/"+invoiceId+"/print", {})
+			.done(function(){ $("#row_" + invoiceId).addClass('table-success')})
 	})
 	var $test_buttons = $(".test_invoice").click(function(event){
 		var invoiceId = event.target.dataset.invoiceId
