@@ -1,11 +1,13 @@
 doctype html
 
-html
+html(lang="es")
 	head
 		title GatoMalo
 		link(rel="icon" href="/assets/favicon.png" type="image/png")
+		link(href="https://fonts.googleapis.com/css?family=Inconsolata|Lato", rel="stylesheet")
 		link(rel="stylesheet", type="text/css", href="/assets/stylesheets/bootstrap.min.css")
 		link(rel="stylesheet", type="text/css", href="/assets/stylesheets/tether.min.css")
+		link(rel="stylesheet", type="text/css", href="/assets/stylesheets/custom.css")
 	body
 
 		.jumbotron
@@ -24,7 +26,7 @@ html
 					tr
 						td= invoice.invoice_id
 						td= invoice.customer_name
-						td= `$${invoice.total.toFixed(2)}`
+						td.money-text= `$${invoice.total.toFixed(2)}`
 						td= invoice.created_time
 						td
 							.btn-group
