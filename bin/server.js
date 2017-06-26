@@ -7,8 +7,10 @@ const pug = require('pug')
 const morgan = require('koa-morgan')
 const serve = require('koa-static')
 const mount = require('koa-mount')
-const cloud_accounting = require('../cloud_accounting')
 const _ = require('lodash')
+
+const cloud_accounting = require('../cloud_accounting')
+const {sequelize, printed_invoice} = require('../orm')
 
 // Routers
 const ApiRouter = require('../routers/ApiRouter')
@@ -18,9 +20,11 @@ const root_generator = async function(ctx){
 	let current_page = ctx.params.page || 1
 	let response = await cloud_accounting.getInvoices(current_page)
 	let parsed_response = JSON.parse(response.body)
+	let printed_invoices = await printed_invoice.all()
 	ctx.body = pug.renderFile(
 		'./templates/index.pug',
 		_.merge(parsed_response, {
+			printed_invoices: printed_invoices
 		})
 	)
 }
@@ -38,4 +42,11 @@ app.use(mount('/assets/javascripts', serve('./node_modules/jquery/dist')))
 app.use(mount('/assets/javascripts', serve('./node_modules/tether/dist/js')))
 app.use(mount('/assets/javascripts', serve('./node_modules/bootstrap/dist/js')))
 
-app.listen(5000)
+// Start the ORM
+sequelize.sync().then(() =>{
+
+	//Start the server
+	const server_port = 5000
+	console.log(`Server running on port ${server_port}`)
+	app.listen(server_port)
+})

@@ -16,7 +16,7 @@ ApiRouter.get('invoice_page', '/:page', async function(ctx){
 
 ApiRouter.post('print_invoice', '/invoice/:invoice_id/print', async function(ctx){
 	let invoice = await cloud_accounting.getInvoice(ctx.params.invoice_id)
-	let result = await printer(invoice.string_output())
+	let result = await printer(invoice.string_output(), ctx.params.invoice_id)
 	ctx.body = invoice.string_output()
 })
 

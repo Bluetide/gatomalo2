@@ -50,3 +50,4 @@ private.env
 Retorno.txt
 test/cloud_accounting.js
 public/stylesheets/custom.css
+database.sqlite

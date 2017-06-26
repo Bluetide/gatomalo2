@@ -21,7 +21,14 @@ html(lang="es")
 					th Date
 					th Actions
 				each invoice in invoices
-					tr
+					
+					//- Check if the invoice was already printed
+					- 
+						has_been_printed = printed_invoices.find( i => 
+							i.zoho_id == invoice.invoice_id 
+						)
+
+					tr(class=(has_been_printed ? 'table-success' : ''))
 						td= invoice.invoice_id
 						td= invoice.customer_name
 						td.money-text= `$${invoice.total.toFixed(2)}`
