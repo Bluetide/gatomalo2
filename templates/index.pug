@@ -34,7 +34,7 @@ html(lang="es")
 						td= invoice.invoice_id
 						td= invoice.customer_name
 						td.money-text= `$${invoice.total.toFixed(2)}`
-						td= invoice.created_time
+						td= moment(invoice.created_time).format('YYYY-MM-DD HH:mm:ss')
 						td
 							.btn-group
 								a.btn.btn-sm.btn-primary.print_invoice(

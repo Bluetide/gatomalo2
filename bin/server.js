@@ -8,6 +8,7 @@ const morgan = require('koa-morgan')
 const serve = require('koa-static')
 const mount = require('koa-mount')
 const _ = require('lodash')
+const moment = require('moment')
 
 const cloud_accounting = require('../cloud_accounting')
 const {sequelize, printed_invoice} = require('../orm')
@@ -24,7 +25,8 @@ const root_generator = async function(ctx){
 	ctx.body = pug.renderFile(
 		'./templates/index.pug',
 		_.merge(parsed_response, {
-			printed_invoices: printed_invoices
+			printed_invoices: printed_invoices,
+			moment: moment,
 		})
 	)
 }
