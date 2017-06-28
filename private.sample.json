@@ -1,4 +1,6 @@
 {
 	"zoho_auth": "Lorem",
-	"zoho_org": "Ipsum"
+	"zoho_org": "Ipsum",
+	"username": "Lorem",
+	"password": "Ipsum"
 }

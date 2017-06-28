@@ -15,6 +15,7 @@ const {sequelize, printed_invoice} = require('../orm')
 
 // Routers
 const ApiRouter = require('../routers/ApiRouter')
+const AuthorizationMiddleware = require('../routers/AuthorizationMiddleware')
 const RootRouter = new Router()
 
 const root_generator = async function(ctx){
@@ -34,6 +35,7 @@ const root_generator = async function(ctx){
 RootRouter.get('index', 	'/'			, root_generator)
 RootRouter.get('invoices','/:page', root_generator)
 
+app.use(AuthorizationMiddleware())
 app.use(morgan('combined'))
 app.use(RootRouter.routes())
 app.use(ApiRouter.routes())
