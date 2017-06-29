@@ -31,10 +31,14 @@ This server was designed to work directly inside a Docker container.
   `./private.env.sample` as example.
 5. Execute the following command to start the service:
 ```bash
-docker run -p 5000:5000 --env-file=private.env --device=/dev/ttyUSB0 --restart=always -d gatomalo2
+docker run -p 5000:5000 -v /srv/gatomalo/database:/srv/gatomalo/database \
+  --env-file=private.env --device=/dev/ttyUSB0 --restart=always \
+  -d gatomalo2
 ```
 Details about this command:
 - _-p_ binds port to 5000 (Allows entry to the server on localhost:5000)
+- _-v_ Saves the database file on `/srv/gatomalo/database` on the host machine.
+Otherwise the `printed_invoice` will be reset whenever the host image changes.
 - _--env-file_ adds the contents of private.env as environment variables to the
 container
 - _--device_ name of the USB port where the printer is installed. Must be the
