@@ -1,42 +1,19 @@
-'use strict'
-
+// Libaries
 const Koa = require('koa')
 const app = new Koa()
-const Router = require('koa-router')
-const pug = require('pug')
 const morgan = require('koa-morgan')
 const serve = require('koa-static')
 const mount = require('koa-mount')
-const _ = require('lodash')
-const moment = require('moment')
 
-const cloud_accounting = require('../cloud_accounting')
-const {sequelize, printed_invoice} = require('../orm')
-
-// Routers
+// Modules
+const {sequelize} = require('../orm')
 const ApiRouter = require('../routers/ApiRouter')
 const AuthorizationMiddleware = require('../routers/AuthorizationMiddleware')
-const RootRouter = new Router()
+const RootRouter = require('../routers/RootRouter')
 
-const root_generator = async function(ctx){
-	let current_page = ctx.params.page || 1
-	let response = await cloud_accounting.getInvoices(current_page)
-	let parsed_response = JSON.parse(response.body)
-	let printed_invoices = await printed_invoice.all()
-	ctx.body = pug.renderFile(
-		'./templates/index.pug',
-		_.merge(parsed_response, {
-			printed_invoices: printed_invoices,
-			moment: moment,
-		})
-	)
-}
-
-RootRouter.get('index', 	'/'			, root_generator)
-RootRouter.get('invoices','/:page', root_generator)
-
-app.use(AuthorizationMiddleware())
+// Mount Routes
 app.use(morgan('combined'))
+app.use(AuthorizationMiddleware())
 app.use(RootRouter.routes())
 app.use(ApiRouter.routes())
 
