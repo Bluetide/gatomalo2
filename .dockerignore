@@ -1,4 +1,4 @@
 node_modules/
 private.json
 private.env
-database.sqlite
+database/gatomalo.sqlite

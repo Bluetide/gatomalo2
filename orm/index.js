@@ -1,10 +1,8 @@
 const Sequelize = require('sequelize')
 
-const sequelize = new Sequelize('sqlite://database.sqlite')
+const sequelize = new Sequelize('sqlite://database/gatomalo.sqlite')
 const printed_invoice = sequelize.define('invoice', {
-  zoho_id:{
-    type: Sequelize.STRING,
-  }
+  zoho_id: Sequelize.STRING,
 })
 
 module.exports = {
