@@ -2,15 +2,20 @@ const cloud_accounting = require('../cloud_accounting')
 const printer = require('../printer')
 const {Refund} = require('../model')
 const body = require('koa-body')
+const {printed_invoice} = require('../orm')
 const router = require('koa-router')({
 	prefix: '/api/invoice'
 })
 
 // Endpoint: Print Invoice
 router.post('print_invoice', '/:invoice_id/print', async (ctx) => {
-	let invoice = await cloud_accounting.getInvoice(ctx.params.invoice_id)
-	let result = await printer(invoice.string_output(), ctx.params.invoice_id)
+	let invoice_id = ctx.params.invoice_id
+	let invoice = await cloud_accounting.getInvoice(invoice_id)
+	let result = await printer(invoice.string_output())
 	ctx.body = invoice.string_output()
+
+	// Save the invoice into the printed list
+	await printed_invoice.create({zoho_id: invoice_id})
 })
 
 // Endpoint: Refund Invoice
