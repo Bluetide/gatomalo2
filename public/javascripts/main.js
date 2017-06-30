@@ -35,4 +35,14 @@ jQuery(function($){
 		ajax_wrapper("/api/invoice/"+invoice_id+"/refund", {legacy_id: fiscal_id})
 	})
 
+	// Activate Report Buttons
+	var $report_x_button = $("#report-x-button")
+	$report_x_button.click(function(event){
+		$.post("/api/report/x")
+	})
+	var $report_y_button = $("#report-z-button")
+	$report_y_button.click(function(event){
+		$.post("/api/report/z")
+	})
+
 })
