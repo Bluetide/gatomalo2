@@ -1,5 +1,3 @@
-'use strict'
-
 const cloud_accounting = require('../cloud_accounting')
 const printer = require('../printer')
 const {Refund} = require('../model')
@@ -8,7 +6,7 @@ const router = require('koa-router')({
 	prefix: '/api/invoice'
 })
 
-// Endopoint: Print Invoice
+// Endpoint: Print Invoice
 router.post('print_invoice', '/:invoice_id/print', async (ctx) => {
 	let invoice = await cloud_accounting.getInvoice(ctx.params.invoice_id)
 	let result = await printer(invoice.string_output(), ctx.params.invoice_id)
