@@ -17,7 +17,7 @@ describe("Product", function(){
 
 			let product = new Product(name, amount, tasa, price, discount)
 			let expected_result =
-				" 000006578900045000Lorem Ipsum Lorem Ipsum\n000004585"
+				" 000006578900045000Lorem Ipsum Lorem Ipsum\nq-000004585"
 
 			expect(product.string_output()).to.equal(expected_result)
 

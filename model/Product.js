@@ -33,7 +33,7 @@ module.exports = class Product{
 			this.name
 		].join('')
 		if (this.discount > 0){
-			return product_line + "\n" + zerofill_decimal(this.discount, 9)
+			return product_line + "\nq-" + zerofill_decimal(this.discount, 9)
 		} else {
 			return product_line
 		}
