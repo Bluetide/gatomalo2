@@ -9,14 +9,13 @@ module.exports = class Product{
 		this.amount = Math.floor(amount)
 		this.tasa = tasa
 		this.price = price
+
+		this.discount_is_percentage = false
 	}
 
-	set_discount_amount(discount=0){
+	set_discount_amount(discount=0, is_percentage=false){
 		this.discount = discount
-	}
-
-	set_discount_percentage(discount=0){
-		this.discount_percentage = discount
+		this.discount_is_percentage = is_percentage
 	}
 
 	parse_tasa(){
@@ -40,9 +39,14 @@ module.exports = class Product{
 			this.name
 		].join('')
 		if (this.discount > 0){
-			return product_line + "\nq-" + zerofill_decimal(this.discount, 9)
-		} else if (this.discount_percentage > 0){
-			return product_line + `\np-${zerofill_decimal(this.discount_percentage, 4)}`
+			// Print percentage-based discount
+			if (this.discount_is_percentage){
+				return `${product_line}\np-${zerofill_decimal(this.discount, 4)}`
+
+			// Print static quantity discount
+			} else {
+				return `${product_line}\nq-${zerofill_decimal(this.discount, 9)}`
+			}
 		} else {
 			return product_line
 		}

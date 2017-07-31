@@ -135,7 +135,7 @@ const translate_product = function(product){
 
 		// Discount by percentage
 		let percentage = parseFloat(product['discount'].replace("%", ""))
-		result.set_discount_percentage(percentage)
+		result.set_discount_amount(percentage, true)
 	} else if(product['discount'] != 0){
 
 		// Fixed discount
