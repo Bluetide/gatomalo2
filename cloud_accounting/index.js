@@ -129,7 +129,15 @@ const translate_product = function(product){
 	]
 
 	// Parse discount value
-	if(product['discount'] != 0){
+	if (_.isString(product['discount'])){
+
+		// Discount by percentage
+		let percentage = parseFloat(product['discount'].replace("%", ""))/100
+		let discount = product['rate'] * percentage
+		parameters.push(discount)
+	} else if(product['discount'] != 0){
+
+		// Fixed discount
 		parameters.push(product['discount'])
 	}
 
