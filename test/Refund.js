@@ -16,7 +16,8 @@ describe('Refund', function(){
 			let ruc = "14200-161-138270"
 			let invoice_number = "6363"
 
-			let product = new Product("Chicheme Chorrerano", 300, 1, 100.45, 0)
+			let product = new Product("Chicheme Chorrerano", 300, 1, 100.45)
+			product.set_discount_amount(0)
 			let client = new Client(name, address, phone, ruc)
 			let invoice = new Invoice(invoice_number, client, 0, [product])
 			let refund = new Refund(invoice_number, invoice)

@@ -4,12 +4,19 @@ const {zerofill_decimal, zerofill_integer} = require('./utils')
 
 module.exports = class Product{
 
-	constructor(name='', amount=0, tasa=0, price=0, discount=0){
+	constructor(name='', amount=0, tasa=0, price=0){
 		this.name = name
 		this.amount = Math.floor(amount)
 		this.tasa = tasa
 		this.price = price
+	}
+
+	set_discount_amount(discount=0){
 		this.discount = discount
+	}
+
+	set_discount_percentage(discount=0){
+		this.discount_percentage = discount
 	}
 
 	parse_tasa(){
@@ -34,6 +41,8 @@ module.exports = class Product{
 		].join('')
 		if (this.discount > 0){
 			return product_line + "\nq-" + zerofill_decimal(this.discount, 9)
+		} else if (this.discount_percentage > 0){
+			return product_line + `\np-${zerofill_decimal(this.discount_percentage, 4)}`
 		} else {
 			return product_line
 		}

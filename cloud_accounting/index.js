@@ -128,20 +128,21 @@ const translate_product = function(product){
 		product['name'], product['quantity'], tasa, product['rate']
 	]
 
-	// Parse discount value
+	let result = new Product(...parameters)
+
+	// Parse discounts per product
 	if (_.isString(product['discount'])){
 
 		// Discount by percentage
-		let percentage = parseFloat(product['discount'].replace("%", ""))/100
-		let discount = product['rate'] * percentage
-		parameters.push(discount)
+		let percentage = parseFloat(product['discount'].replace("%", ""))
+		result.set_discount_percentage(percentage)
 	} else if(product['discount'] != 0){
 
 		// Fixed discount
-		parameters.push(product['discount'])
+		result.set_discount_amount(product['discount'])
 	}
 
-	return new Product(...parameters)
+	return result
 
 }
 

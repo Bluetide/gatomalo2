@@ -15,7 +15,8 @@ describe("Product", function(){
 			let price = 657.89
 			let discount = 45.8567
 
-			let product = new Product(name, amount, tasa, price, discount)
+			let product = new Product(name, amount, tasa, price)
+			product.set_discount_amount(discount)
 			let expected_result =
 				" 000006578900045000Lorem Ipsum Lorem Ipsum\nq-000004585"
 
@@ -31,7 +32,8 @@ describe("Product", function(){
 			let price = 300
 			let discount = 0
 
-			let product = new Product(name, amount, tasa, price, discount)
+			let product = new Product(name, amount, tasa, price)
+			product.set_discount_amount(discount)
 			let expected_result = "!000003000000001000Chicheme Chorrerano"
 
 			expect(product.string_output()).to.equal(expected_result)
