@@ -5,7 +5,6 @@ RUN mkdir -p /srv/gatomalo
 WORKDIR /srv/gatomalo
 
 # Bundle App Source
-RUN apt-get install git -y
 RUN git clone https://github.com/Bluetide/gatomalo2.git .
 
 # Install Dependencies
