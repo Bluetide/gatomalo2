@@ -12,7 +12,7 @@ module.exports = async function(content_string="810Test"){
 
 	// Build the file asynchronously using Promises and yields
 	let info = await temp.openAsync({suffix:".txt"})
-	let content = await fs.writeAsync(info.fd, content_string, 'utf-8')
+	let content = await fs.writeAsync(info.fd, content_string, null, 'latin1')
 	await fs.closeAsync(info.fd)
 
 	// Manually create promise due to nonstandard callback
