@@ -5,7 +5,7 @@ const {zerofill_decimal, zerofill_integer} = require('./utils')
 module.exports = class Product{
 
 	constructor(name='', amount=0, tasa=0, price=0){
-		this.name = name
+		this.name = name.replace(/\n\s?/g, " ") // Remove Newlines
 		this.amount = Math.floor(amount)
 		this.tasa = tasa
 		this.price = price
@@ -36,7 +36,7 @@ module.exports = class Product{
 			zerofill_decimal(this.price, 10),
 			zerofill_integer(this.amount, 5),
 			"000",
-			this.name
+			this.name.substring(0, 116)
 		].join('')
 		if (this.discount > 0){
 			// Print percentage-based discount

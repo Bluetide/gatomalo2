@@ -124,8 +124,11 @@ const translate_product = function(product){
 		tasa = 'error'
 	}
 
+	// In case the product has no name, use its description
+	let name = product['name'] ? product['name'] : product['description']
+
 	let parameters = [
-		product['name'], product['quantity'], tasa, product['rate']
+		name, product['quantity'], tasa, product['rate']
 	]
 
 	let result = new Product(...parameters)
