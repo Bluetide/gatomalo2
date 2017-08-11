@@ -38,6 +38,26 @@ describe("Product", function(){
 
 			expect(product.string_output()).to.equal(expected_result)
 		})
+
+		it("Should truncate product name to 116 characters", () => {
+
+			var longName = ''
+			for (var index = 0; index < 150; index++) {
+				longName = longName.concat(index%10)
+			}
+			let tasa = 1
+			let amount = 1
+			let price = 300
+			let discount = 0
+
+			let product = new Product(longName, amount, tasa, price)
+			product.set_discount_amount(discount)
+			let expected_result = "!00000300000000100001234567890123456789"
+				+ "0123456789012345678901234567890123456789012345678901234"
+				+ "56789012345678901234567890123456789012345"
+
+			expect(product.string_output()).to.equal(expected_result)
+		})
 	})
 
 })
