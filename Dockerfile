@@ -1,4 +1,4 @@
-FROM node:8.4
+FROM node:8.7
 
 # Create app repository
 RUN mkdir -p /srv/gatomalo
