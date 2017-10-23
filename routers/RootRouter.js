@@ -17,6 +17,7 @@ async function root_function(ctx){
 	let sent_to_view = _.merge(parsed_response, {
 		printed_invoices: printed_invoices,
 		moment: moment,
+		version: process.env.npm_package_version,
 	})
 	ctx.body = pug.renderFile('./templates/index.pug', sent_to_view)
 }
