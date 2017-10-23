@@ -1,10 +1,10 @@
 .modal.fade#progressDialog(role="dialog")
-	.modal-dialog
+	.modal-dialog(role="document")
 		.modal-content
 			.modal-header
-				button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+				h5.modal-title Please Wait....
+				button.close(type="button" data-dismiss="modal" aria-label="Close")
 					span(aria-hidden="true") &times;
-				h4.modal-title Please Wait....
 			.modal-body
 				.progress.progress-success
 					progress.progress.progress-bar.progress-bar-info.progress-bar-striped(
