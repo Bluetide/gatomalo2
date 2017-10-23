@@ -1,0 +1,12 @@
+version: '3'
+services:
+  gatomalo:
+    image: zubietaroberto/gatomalo
+    volumes:
+      - /srv/gatomalo2/database:/srv/gatomalo/database
+    devices:
+      - /dev/ttyUSB0
+    ports:
+      - "5000:5000"
+    restart: always
+    env_file: private.env
