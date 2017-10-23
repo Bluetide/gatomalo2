@@ -1,6 +1,6 @@
 {
   "name": "gatomalo",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Interface for panamanian fiscal printers",
   "main": "index.js",
   "scripts": {
