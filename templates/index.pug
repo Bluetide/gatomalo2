@@ -6,6 +6,10 @@ html(lang="es")
 		link(rel="icon" href="/assets/favicon.png" type="image/png")
 		link(href="https://fonts.googleapis.com/css?family=Inconsolata|Lato", rel="stylesheet")
 		link(rel="stylesheet", type="text/css", href="/assets/stylesheets/custom.css")
+			
+		script(src="/assets/javascripts/jquery.min.js" defer=true)
+		script(src="/assets/javascripts/bootstrap.bundle.min.js" defer=true)
+		script(src="/assets/javascripts/main.js" defer=true)
 	body
 
 		.jumbotron
@@ -71,8 +75,3 @@ html(lang="es")
 
 		include ./get_fiscal_id_dialog
 		include ./progress_dialog
-
-		script(src="/assets/javascripts/jquery.min.js")
-		script(src="/assets/javascripts/tether.min.js")
-		script(src="/assets/javascripts/bootstrap.min.js")
-		script(src="/assets/javascripts/main.js")
