@@ -14,6 +14,12 @@ module.exports = class Product{
 	}
 
 	set_discount_amount(discount=0, is_percentage=false){
+		// printer bug: does not accept 100% discount :(
+		if (is_percentage && discount >= 100){
+			this.discount = this.price
+			this.discount_is_percentage = false
+			return
+		}
 		this.discount = discount
 		this.discount_is_percentage = is_percentage
 	}

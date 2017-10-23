@@ -58,6 +58,18 @@ describe("Product", function(){
 
 			expect(product.string_output()).to.equal(expected_result)
 		})
+
+		// EDGE CASE: The printer does not accept 100% discount on products! Must fallback to absolute amount.
+		it('Should fallback to absolute amount discount when discount amount is 100%', () => {
+
+			let product = new Product('Chicheme Chorrerano', 1, 1, 440)
+			product.set_discount_amount(100, true)
+			let result_text = '!000004400000001000Chicheme Chorrerano'
+				+ '\nq-000044000'
+
+			expect(product.string_output()).to.equal(result_text)
+
+		})
 	})
 
 })
