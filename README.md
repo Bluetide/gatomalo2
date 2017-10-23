@@ -22,18 +22,17 @@ Includes some minimal unit tests for double-checking the output strings. They
 can be executed by running `npm test`
 
 ## Running through Docker
-This server was designed to work directly inside a Docker container.
+This server was designed to work directly inside a Docker container. No
+`git pull` required.
 
-1. [Install Docker][2]:
-2. Copy this repository.
-3. Build the container: `docker build . -t gatomalo2`
-4. Write `./private.env` with your Zoho Books credentials. Use
+1. [Install Docker][2]
+2. Write `./private.env` with your Zoho Books credentials. Use
   `./private.env.sample` as example.
-5. Execute the following command to start the service:
+3. Execute the following command to start the service:
 ```bash
 docker run -p 5000:5000 -v /srv/gatomalo/database:/srv/gatomalo/database \
   --env-file=private.env --device=/dev/ttyUSB0 --restart=always \
-  -d gatomalo2
+  -d zubietaroberto/gatomalo
 ```
 Details about this command:
 - _-p_ binds port to 5000 (Allows entry to the server on localhost:5000)
@@ -45,6 +44,25 @@ container
 same as the one in `./Puerto.txt`
 - _--restart_ the service will always start with the host computer.
 - _-d_ run as a daemon.
+- _zubietaroberto/gatomalo_ the name of this image in *Docker Hub*
+
+## Running through docker-compose
+An even easier deployment experience.
+
+1. [Install Docker][2]
+2. [Install Docker-Compose][3]
+3. `mkdir /srv/gatomalo2`
+4. `mkdir /srv/gatomalo2/database`
+5. `cd /srv/gatomalo2`
+6. Write `/srv/gatomalo2/private.env` with your Zoho Books credentials. Use
+  `./private.env.sample` as example.
+7. Copy `./docker-compose.yml` into `/srv/gatomalo2/`
+8. Start the service: `docker-compose up -d`
+
+The `docker-compose` will install all the dependencies, mount the folder as a
+volume, create the SQLite database and automatically restart the container when
+the machine restarts.
 
 [1]: https://github.com/zubietaroberto
 [2]: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04
+[3]: https://docs.docker.com/compose/install/
