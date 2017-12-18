@@ -1,6 +1,6 @@
 {
   "name": "gatomalo",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Interface for panamanian fiscal printers",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,7 @@
     "printer"
   ],
   "engines": {
-    "node": "8.7.0"
+    "node": "9.x"
   },
   "author": "Roberto E. Zubieta",
   "license": "MIT",
@@ -40,7 +40,7 @@
     "koa-static": "^4.0.0",
     "lodash": "^4.16.6",
     "moment": "^2.18.1",
-    "nconf": "^0.8.4",
+    "nconf": "^0.9.x",
     "node-sass": "^4.5.3",
     "popper.js": "^1.12.6",
     "pug": "^2.0.0-rc.2",

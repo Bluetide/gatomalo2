@@ -1,4 +1,4 @@
-FROM node:8.7
+FROM node:9
 
 # Create app repository
 RUN mkdir -p /srv/gatomalo
@@ -8,7 +8,7 @@ WORKDIR /srv/gatomalo
 RUN git clone https://github.com/Bluetide/gatomalo2.git .
 
 # Install Dependencies
-RUN yarn install
+RUN yarn install --silent
 
 # Start
 EXPOSE 5000
