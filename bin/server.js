@@ -23,7 +23,7 @@ app.use(StaticFileMiddleware())
 sequelize.sync().then(() =>{
 
 	//Start the server
-	const server_port = 5000
+	const server_port = 5001
 	console.log(`Server running on port ${server_port}`)
 	app.listen(server_port)
 })
