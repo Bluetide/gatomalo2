@@ -1,7 +1,7 @@
 # GATOMALO
 
 Server for panamanian fiscal printers, written in NodeJS by [Roberto E. Zubieta][1].
-
+- Efrain Lay
 *Software made in Panama*
 
 ## Summary
